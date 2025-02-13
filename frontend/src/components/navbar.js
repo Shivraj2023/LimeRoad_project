@@ -50,7 +50,7 @@ function Navbar() {
           kids: Array.from(categoryMap.kids),
           home: Array.from(categoryMap.home),
         });
-        console.log("Updated Categories:", categoryMap);
+        
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
@@ -70,7 +70,7 @@ function Navbar() {
     >
        {!search? (
       <div className="container-fluid px-3">
-        <Link className="navbar-brand" to="/home">
+        <Link className="navbar-brand" to="/">
           <img
             src="https://logos-world.net/wp-content/uploads/2023/01/Limeroad-Logo.jpg"
             alt="Logo"

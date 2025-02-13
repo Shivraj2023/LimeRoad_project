@@ -54,7 +54,10 @@ function Banner() {
       : 'men';
   
     setSelected(categoryFromUrl);
-  }, [searchParams]);
+    if (!searchParams.has('occasion')) {
+      setSearchParams({ occasion: 'myfeed' });
+    }
+  }, [searchParams, setSearchParams]);
   
   const handleClick = (category) => {
     setSearchParams({ occasion: category });
@@ -65,6 +68,7 @@ function Banner() {
   return (
     <div>
       <div className='banner-main'>
+      
     <div className='first-main'>
           <div className='first-main-content'>
             <div 
@@ -78,7 +82,7 @@ function Banner() {
             onClick={() => handleClick('kids')}>Kids</div>
          </div>
         </div>
-      </div>
+      
       <div className='second-main'>
  
   <Link 
@@ -104,6 +108,7 @@ function Banner() {
         <span className='category-label'>{item.category}</span>
       </Link>
   ))}
+</div>
 </div>
 
     </div>

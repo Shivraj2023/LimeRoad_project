@@ -7,10 +7,11 @@ import BrandList from './brandlist';
 function Home() {
   return (
     <div>
-      <Navbar></Navbar>
-      <Banner></Banner>
+           <div  style={{ backgroundColor: "rgba(223, 223, 228, 0.411)" }}>
+       <Banner></Banner>
       <Carousel></Carousel>
-      
+      <BrandList></BrandList>
+      </div>
     </div>
   )
 }
