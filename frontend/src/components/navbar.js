@@ -65,7 +65,7 @@ function Navbar() {
 
   return (
     <nav
-      className="navbar navbar-expand-lg  px-5"
+      className="navbar navbar-expand-lg  px-5 fixed-navbar"
       style={{ height: "60px", paddingTop: "5px", paddingBottom: "5px" }}
     >
        {!search? (

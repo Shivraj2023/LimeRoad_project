@@ -8,11 +8,12 @@ function Router() {
   return (
     <BrowserRouter>
       <Navbar />  
-      <Routes>
-        <Route path="/" element={<Home />}>  
-        <Route path="/:main/:sub" element={<BrandList />} />
-        </Route> 
-      </Routes>
+      
+        <Routes>
+          <Route path="/" element={<Home />} />
+         
+        </Routes>
+      
     </BrowserRouter>
   );
 }

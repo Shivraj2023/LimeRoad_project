@@ -16,19 +16,13 @@ const BrandList = () => {
       .then((response) => response.json())
       .then((data) => {
         let products = [];
-  
-        // Show products based on main category
-        if (['men', 'women', 'kids'].includes(main?.toLowerCase())) {
-          const categoryKey = `${main?.toLowerCase()}s_products`; 
-          const allProducts = data[categoryKey] || [];
-          
-         
-          products = sub ? 
-            allProducts.filter(item => item.category?.toLowerCase() === sub.toLowerCase()) :
-            allProducts;
-  
-        } else if (sub?.toLowerCase() === 'myfeed') {
-          
+      
+        const categoryKey = main?.toLowerCase() === 'kids'? 'kids_products'
+         : `${main?.toLowerCase()}s_products`; 
+        
+       
+        
+        if (sub?.toLowerCase() === 'myfeed') {
           products = [
             ...(data.mens_products || []),
             ...(data.womens_products || []),
@@ -36,14 +30,27 @@ const BrandList = () => {
             ...(data.home_products || [])
           ];
         }
+        
+        else if (['men', 'women', 'kids'].includes(main?.toLowerCase())) {
+          
+          const allProducts = data[categoryKey] || [];
+          
+          products = sub
+            ? allProducts.filter(
+                (item) => item.category?.toLowerCase() === sub.toLowerCase()
+              )
+            : allProducts;
+        }
   
         
         const uniqueBrands = [
           ...new Set(
-            products.map(item => JSON.stringify({
-              brandImage: item.brand_image,
-              brandName: item.brand_name || 'Brand',
-            }))
+            products.map(item =>
+              JSON.stringify({
+                brandImage: item.brand_image,
+                brandName: item.brand_name || 'Brand',
+              })
+            )
           )
         ].map(JSON.parse);
   
@@ -78,7 +85,7 @@ const BrandList = () => {
       ) : (
         <div className="col-12 text-center">
           <p className="no-brands-card">
-            No brands found for the selected categories.
+            No brands found for the selected categorie.
           </p>
         </div>
       )}
