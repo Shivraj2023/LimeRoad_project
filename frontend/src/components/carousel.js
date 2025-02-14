@@ -1,64 +1,65 @@
-import React from 'react';
-import './carousel.css'; 
+import { useEffect } from "react";
 
+const Carouselfeed = () => {
+  useEffect(() => {
+    document.querySelectorAll('.carousel').forEach(carouselElement => {
+      new window.bootstrap.Carousel(carouselElement, {
+        interval: 4000,
+        ride: "carousel",
+        pause: false,
+        wrap: true
+      });
+    });
+  }, []);
 
-function Carousel() {
   return (
-    <div className="container mt-4" >
-      <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-        
-        {/* Indicators */}
-        <div className="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="0" className="active bg-dark"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="1" className="bg-dark"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="2" className="bg-dark"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="3" className="bg-dark"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="4" className="bg-dark"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="5" className="bg-dark"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="6" className="bg-dark"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="7" className="bg-dark"></button>
-        </div>
-
-        {/* Carousel Items */}
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="https://n-img1.junaroad.com/assets/images/mobileNotif/img-1738312997291.jpg?crsl_pos=4" className="d-block mx-auto w-40 h-auto" alt="add"/>
+    <div
+      className='d-flex align-items-center justify-content-center'
+      style={{ width: '63%', marginLeft: '280px', gap: '2px' }}
+    >
+      {/* Carousel 1 */}
+      <div id='carousel1' className='carousel slide' style={{ width: '50%' }}>
+        <div className='carousel-inner'>
+          <div className='carousel-item active'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737985191609.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
           </div>
-          <div className="carousel-item">
-            <img src="https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737467216669.jpg?crsl_pos=4" className="d-block mx-auto w-40 h-auto" alt="add"/>
+          <div className='carousel-item'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1738312997291.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
           </div>
-          <div className="carousel-item">
-            <img src="https://n-img1.junaroad.com/assets/images/mobileNotif/img-1734691416778.jpg?crsl_pos=4" className="d-block mx-auto w-40 h-auto" alt="add"/>
+          <div className='carousel-item'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737467216669.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
           </div>
-          <div className="carousel-item">
-            <img src="https://n-img1.junaroad.com/assets/images/mobileNotif/img-1738313158166.jpg?crsl_pos=4" className="d-block mx-auto w-40 h-auto" alt="add"/>
+          <div className='carousel-item'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1738313158166.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
           </div>
-          <div className="carousel-item">
-            <img src="https://n-img1.junaroad.com/assets/images/mobileNotif/img-1736445630290.jpg?crsl_pos=4" className="d-block mx-auto w-40 h-auto" alt="add"/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://n-img1.junaroad.com/assets/images/mobileNotif/img-1736445646414.jpg?crsl_pos=4" className="d-block mx-auto w-40 h-auto" alt="add"/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737375285117.jpg?crsl_pos=4" className="d-block mx-auto w-40 h-auto" alt="add"/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737375339231.jpg?crsl_pos=4" className="d-block mx-auto w-40 h-auto" alt="add"/>
+          <div className='carousel-item'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737372983809.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
           </div>
         </div>
+      </div>
 
-        {/* Navigation Buttons */}
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+      {/* Carousel 2 */}
+      <div id='carousel2' className='carousel slide' style={{ width: '50%' }}>
+        <div className='carousel-inner'>
+          <div className='carousel-item active'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1738312997291.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
+          </div>
+          <div className='carousel-item'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737467216669.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
+          </div>
+          <div className='carousel-item'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1738313158166.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
+          </div>
+          <div className='carousel-item'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737372983809.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
+          </div>
+          <div className='carousel-item'>
+            <img src='https://n-img1.junaroad.com/assets/images/mobileNotif/img-1737985191609.jpg?crsl_pos=4' className="d-block w-100" alt='...' height='175px' />
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default Carousel;
+export default Carouselfeed;

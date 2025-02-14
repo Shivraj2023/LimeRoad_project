@@ -10,7 +10,7 @@ function Router() {
       <Navbar />  
       <Routes>
         <Route path="/" element={<Home />}>  
-        <Route path="/:mainCategory" element={<BrandList />} />
+        <Route path="/:main/:sub" element={<BrandList />} />
         </Route> 
       </Routes>
     </BrowserRouter>

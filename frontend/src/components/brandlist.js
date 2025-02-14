@@ -1,4 +1,4 @@
-// BrandList.js
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import BrandCard from './brandcard';
@@ -6,9 +6,9 @@ import './brandlist.css';
 
 
 const BrandList = () => {
-  const { mainCategory } = useParams();
   const [searchParams] = useSearchParams();
-  const category = searchParams.get('occasion');
+  const main = searchParams.get('main');      
+  const sub = searchParams.get('sub');   
   const [brandImages, setBrandImages] = useState([]);
 
   useEffect(() => {
@@ -16,40 +16,42 @@ const BrandList = () => {
       .then((response) => response.json())
       .then((data) => {
         let products = [];
-        
-        
-        if (category?.toLowerCase() === 'myfeed') {
-          const allCategories = [
+  
+        // Show products based on main category
+        if (['men', 'women', 'kids'].includes(main?.toLowerCase())) {
+          const categoryKey = `${main?.toLowerCase()}s_products`; 
+          const allProducts = data[categoryKey] || [];
+          
+         
+          products = sub ? 
+            allProducts.filter(item => item.category?.toLowerCase() === sub.toLowerCase()) :
+            allProducts;
+  
+        } else if (sub?.toLowerCase() === 'myfeed') {
+          
+          products = [
             ...(data.mens_products || []),
             ...(data.womens_products || []),
             ...(data.kids_products || []),
             ...(data.home_products || [])
           ];
-          products = allCategories;
-        } else {
-          const categoryKey = `${mainCategory}s_products`;
-          products = data[categoryKey] || [];
         }
-          
-        const filteredBrands = products
-          .filter((item) => 
-            category?.toLowerCase() === 'myfeed' || 
-            item.category?.toLowerCase() === category?.toLowerCase()
-          )
-          .map((item) => ({
-            brandImage: item.brand_image,
-            brandName: item.brand_name || 'Brand',
-          }));
   
-      
+        
         const uniqueBrands = [
-          ...new Set(filteredBrands.map(item => JSON.stringify(item)))
+          ...new Set(
+            products.map(item => JSON.stringify({
+              brandImage: item.brand_image,
+              brandName: item.brand_name || 'Brand',
+            }))
+          )
         ].map(JSON.parse);
   
         setBrandImages(uniqueBrands);
       })
       .catch((error) => console.error("Error fetching products:", error));
-  }, [mainCategory, category]);
+  }, [main, sub]);
+  
   
 
   if (!brandImages.length) {
