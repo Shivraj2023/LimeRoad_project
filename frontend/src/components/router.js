@@ -25,8 +25,9 @@ function Router() {
         <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/products/:category/:id" element={<Productdetails />} />
+          <Route path="/:category/:subcategory" element={<Products/>}/>
           <Route path="/:category" element={<Products/>}/>
+          <Route path="/products/:category/:id" element={<Productdetails />} />
           </Route>
         </Routes>
       

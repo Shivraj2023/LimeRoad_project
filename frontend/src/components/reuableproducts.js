@@ -1,19 +1,69 @@
 
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import './reusable.css';
 
-const ProductPage = ( {products=[],category}) => {
-  const [filters, setFilters] = useState({ price: '', discount: '' });
-  
-  if (!Array.isArray(products)) {
-    console.error("Error: products is not an array", products);
-    return <p>Error loading products.</p>;
-  }
- 
+const ProductPage = ( {products}) => {
 
-  const categories = [...new Set(products.map((product) => product.category))];
+   const { category, subcategory } = useParams();
+   const [filteredProducts, setFilteredProducts] = useState([]);
+   const[filters,setFilters]=useState([])
+   const [categories, setCategories] = useState([]);
+  
+   useEffect(() => {
+    console.log("category: ", category);
+  console.log("subcategory: ", subcategory);
+
+    if (category) {
+      // Determine the category key based on the category
+      let categoryKey = "";
+      if (category === "men" || category === "women") {
+        categoryKey = `${category.toLowerCase()}s_products`; // Append 's_products' for 'men' and 'women'
+      } else if (category === "kids" || category === "home") {
+        categoryKey = `${category.toLowerCase()}_products`; // Append '_products' for 'kids' and 'home'
+      }
+  
+      if (categoryKey && products[categoryKey]) {
+        const categoryList = [...new Set(products[categoryKey].map((product) => product.category))];
+        setCategories(categoryList); // Set available categories for the selected category
+        console.log("categoryKey data: ", products[categoryKey]); // Check if the data exists
+        console.log("key------", categoryKey);
+      }
+      console.log("products[categoryKey] before filtering: ", products[categoryKey]);
+
+  
+      if (subcategory) {
+        // Filter products based on both category and subcategory
+        const filtered = products[categoryKey]?.filter(
+          (product) =>
+            product.category.toLowerCase() === subcategory.toLowerCase() // Filter by subcategory
+                   ) 
+
+        setFilteredProducts(filtered);
+      } else {
+        // Filter products based only on category
+        const filtered = products[categoryKey]
+               
+        setFilteredProducts(filtered);
+      }
+    } else {
+      // If no category is specified, show all products (you can modify this if needed)
+      setFilteredProducts([]);
+      setCategories([]);
+    }
+  }, [category, subcategory, products]);
+  
+ 
+   console.log("filtered products=====",filteredProducts)
+
+
+
+
+
+  
 
 
   const handleFilterChange = (e) => {
@@ -21,10 +71,11 @@ const ProductPage = ( {products=[],category}) => {
     setFilters({ ...filters, [name]: value });
   };
 
-  const filteredProducts = products.filter((p) =>
+  /* const filteredProducts1 = filteredProducts1.filter((p) =>
     (!filters.price || p.price <= parseInt(filters.price)) &&
     (!filters.discount || p.discount >= parseInt(filters.discount))
-  );
+  ); */
+  
 
   return (
     <div className="container-fluid">
