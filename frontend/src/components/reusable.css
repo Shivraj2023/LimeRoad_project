@@ -68,6 +68,21 @@
   .whatsapp-icon:hover {
     color: #25d366;
   }
+
+  .category-badge {
+    border-radius: 50%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 80px;  /* Ensures a circular shape */
+    min-height: 40px; /* Adjusts size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
   
   /* Responsive Adjustments */
   @media (max-width: 768px) {

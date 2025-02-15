@@ -1,9 +1,20 @@
-// Formatted and Enhanced ProductPage Component with WhatsApp and Heart Icons
-import React, { useState } from 'react';
+
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import './reusable.css';
 
-const ProductPage = ({ products = [] }) => {
+const ProductPage = ( {products=[]}) => {
   const [filters, setFilters] = useState({ price: '', discount: '' });
+  
+  if (!Array.isArray(products)) {
+    console.error("Error: products is not an array", products);
+    return <p>Error loading products.</p>;
+  }
+ 
+
+  const categories = [...new Set(products.map((product) => product.category))];
+
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -39,13 +50,24 @@ const ProductPage = ({ products = [] }) => {
 
         {/* Product Display */}
         <div className="col-md-9 p-3">
-          <h5>Products</h5>
+        
+      {/* Categories Section */}
+      <div className="d-flex flex-wrap ps-5 mb-3">
+    {categories.map((category, index) => (
+      <span key={index} className="badge bg-light text-black p-2  ms-4 me-4 mb-3" style={{backgroundColor:"white", border:"1px solid grey", borderRadius: "10%"}}>
+        {category}
+      </span>
+    ))}
+      </div>
           <div className="row">
             {filteredProducts.length ? (
               filteredProducts.map((product) => (
                 <div key={product.id} className="col-md-4 mb-4">
                   <div className="card">
-                    <img src={product.image} className="card-img-top" alt={product.name} />
+                  <Link to={`/${product.category}/${product.id}`}>
+  <img key={product.image} src={product.image} className="card-img-top" alt={product.name} />
+</Link>
+
                     <div className="card-body">
                       <p className="card-text">
                         ₹{product.price} &nbsp;
