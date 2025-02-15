@@ -2,21 +2,32 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './navbar';
 import Home from './home';
-import BrandList from './brandlist';
+
 import Products from './products';
 import Productdetails from './productdetails';
+import { Outlet } from 'react-router-dom';
+
+
+const Layout = () => (
+  <>
+    <Navbar />
+    <Outlet />
+  </>
+);
 
 
 function Router() {
   return (
     
     <BrowserRouter>
-      <Navbar />  
+       
       
         <Routes>
-          <Route path="/" element={<Home />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/products/:category/:id" element={<Productdetails />} />
           <Route path="/:category" element={<Products/>}/>
-          <Route path="/:category/:id" element={<Productdetails />} ></Route>
+          </Route>
         </Routes>
       
     </BrowserRouter>

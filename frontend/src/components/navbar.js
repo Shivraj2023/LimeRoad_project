@@ -104,6 +104,7 @@ function Navbar() {
                 <Link className="nav-link  ps-5 fw-bold nav-child" to={`/${category}`} 
                 >
                   {category.toUpperCase()}
+                  
                 </Link>
                 </li>
                 {activeDropdown === category && (
@@ -112,7 +113,7 @@ function Navbar() {
                       <li key={i}>
                         <Link
                           className="dropdown-item"
-                          to={`/category/${subCategory
+                          to={`/${category}/${subCategory
                             .toLowerCase()
                             .replace(/\s+/g, "-")}`}
                         >

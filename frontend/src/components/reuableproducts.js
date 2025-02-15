@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './reusable.css';
 
-const ProductPage = ( {products=[]}) => {
+const ProductPage = ( {products=[],category}) => {
   const [filters, setFilters] = useState({ price: '', discount: '' });
   
   if (!Array.isArray(products)) {
@@ -64,7 +64,7 @@ const ProductPage = ( {products=[]}) => {
               filteredProducts.map((product) => (
                 <div key={product.id} className="col-md-4 mb-4">
                   <div className="card">
-                  <Link to={`/${product.category}/${product.id}`}>
+                  <Link to={`/products/${category}/${product.id}`}>
   <img key={product.image} src={product.image} className="card-img-top" alt={product.name} />
 </Link>
 

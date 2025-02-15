@@ -12,8 +12,8 @@
 
 .custom-navbar {
     height: 50px; 
-    padding-top: 5px;
-    padding-bottom: 5px;
+   /*  padding-top: 5px;
+    padding-bottom: 5px; */
     position: fixed;
     /* position: relative; */ 
     z-index: 1000;

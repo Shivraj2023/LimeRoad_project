@@ -36,7 +36,7 @@ const Products = () => {
   return (
     <div className="products-container">
       {products.length > 0 ? (
-        <ProductPage products={products} />
+        <ProductPage products={products} category={category} />
       ) : (
         <p className="no-products">No products available for this category.</p>
       )}

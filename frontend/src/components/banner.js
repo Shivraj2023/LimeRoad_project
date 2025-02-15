@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+
+
 import './banner.css';
 
 
@@ -10,7 +11,7 @@ function Banner() {
   const [categories, setCategories] = useState({ men: [], women: [], kids: [], home: [] });
   const[selected,setSelected]=useState(searchParams.get('occasion')||'men');
    const[selectedAvatar,setSelectedAvatar]=useState('myfeed')
-   const navigate = useNavigate();
+  
 
  
   useEffect(() => {
@@ -43,25 +44,31 @@ function Banner() {
           kids: Array.from(categoryMap.kids),
           home: Array.from(categoryMap.home),
         });
-        console.log("Updated Categories::::::::::", categoryMap);
+        
       });
   }, []);
+  
   useEffect(() => {
     const main = searchParams.get('main') || 'men';
-    const sub = searchParams.get('sub')||null;
+    const sub = searchParams.get('sub') || null;
   
-    setSelected(main);  // Set the main category
-    setSelectedAvatar(sub); // Set subcategory only if present, else empty
-      
+    setSelected(main);
+    setSelectedAvatar(sub);
+  
     if (!searchParams.has('main')) {
-      setSearchParams({ main: 'men' });
+      setSearchParams((prevParams) => {
+        const newParams = new URLSearchParams(prevParams);
+        newParams.set('main', 'men');
+        return newParams;
+      });
     }
   }, [searchParams, setSearchParams]);
   
   
   const handleClick = (mainCategory) => {
+    console.log("Clicked:", mainCategory);
     setSelected(mainCategory);
-    setSearchParams({ main: mainCategory.toLowerCase() });
+    setSearchParams({ main: mainCategory.toLowerCase()});
     setSelectedAvatar(null);
    /*  navigate(`/${mainCategory}?main=${mainCategory}`); */
   };
