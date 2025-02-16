@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes,Link } from 'react-router-dom';
 import Navbar from './navbar';
 import Home from './home';
-
 import Products from './products';
 import Productdetails from './productdetails';
+import BrandProduct from './brandproduct';
 import { Outlet } from 'react-router-dom';
 
 
@@ -25,6 +25,7 @@ function Router() {
         <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/brand/:category/:brandid" element={<BrandProduct />} />
           <Route path="/:category/:subcategory" element={<Products/>}/>
           <Route path="/:category" element={<Products/>}/>
           <Route path="/products/:category/:id" element={<Productdetails />} />

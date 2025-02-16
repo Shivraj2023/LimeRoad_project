@@ -114,7 +114,7 @@ const ProductPage = ( {products}) => {
             {filteredProducts.length ? (
               filteredProducts.map((product) => (
                 <div key={product.id} className="col-md-4 mb-4">
-                  <div className="card">
+                  <div className="card new-card">
                   <Link to={`/products/${category}/${product.id}`}>
   <img key={product.image} src={product.image} className="card-img-top" alt={product.name} />
 </Link>

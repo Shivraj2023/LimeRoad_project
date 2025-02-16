@@ -3,8 +3,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color:rgba(223, 223, 228, 0.411);
+    background-color:rgb(204, 204, 211);
 }
+
+.main_container{
+    margin-top: 100px;
+    background-color:#ECECEC;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    min-width:100%;
+   
+}
+   
 
 /* Product Image */
 .d-flex.gap-2 img {
@@ -99,7 +109,32 @@ td {
 
 .mt-3 .img-fluid:hover {
     transform: scale(1.05);
+}  
+.size-button {
+    border: 1px solid black;
+    color: white; /* Ensures text is visible */
+    background-color: black !important; /* Ensures it doesn't get overridden */
 }
+  
+.size-button:hover{
+   color: black;
+    background-color: rgb(146, 211, 231);
+}
+  
+.size-button.selected {
+    background-color: rgb(177, 225, 135) !important;
+    color: white !important;
+}
+
+  .product-details-container {
+     background-color:white;
+    padding:30px;
+    border-radius: 10px; /* Optional: To make the design smoother */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds slight shadow for better visibility */
+    margin: 30px 0;
+  }
+  
+  
 
 /* Responsive */
 @media (max-width: 768px) {

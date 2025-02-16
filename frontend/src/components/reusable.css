@@ -20,7 +20,7 @@
   }
   
   /* Product Card Styles */
-  .card {
+  .card .new-card {
     margin-left: 20px;
     height: 550px;
     width: 320px;
@@ -32,7 +32,7 @@
   .card:hover {
     transform: translateY(-5px);
   }
-  .card-img-top {
+    .new-card .card-img-top {
     height: 500px;
     object-fit: cover;
     border-radius: 12px 12px 0 0;
@@ -69,18 +69,8 @@
     color: #25d366;
   }
 
-  .category-badge {
-    border-radius: 50%;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    min-width: 80px;  /* Ensures a circular shape */
-    min-height: 40px; /* Adjusts size */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  
+  
   
   
   

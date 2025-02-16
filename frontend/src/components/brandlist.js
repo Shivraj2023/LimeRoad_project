@@ -49,6 +49,7 @@ const BrandList = () => {
               JSON.stringify({
                 brandImage: item.brand_image,
                 brandName: item.brand_name || 'Brand',
+                brandId:item.id,
               })
             )
           )
@@ -79,6 +80,8 @@ const BrandList = () => {
               <BrandCard 
                 image={brand.brandImage} 
                 brandName={brand.brandName} 
+                brandid={brand.brandId}
+                main={main}
               />
             </div>
           ))

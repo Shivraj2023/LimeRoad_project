@@ -8,6 +8,7 @@ function Productdetails() {
   const { category, id } = useParams();
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
+  const [selectedSize, setSelectedSize] = useState(null);
 
   useEffect(() => {
     fetch("/assets/assets.json")
@@ -41,6 +42,20 @@ function Productdetails() {
       });
   }, [category, id]);
 
+  const handlesize=(size)=>{
+    setSelectedSize(size); 
+  }
+
+
+  const handletocart=()=>{
+    if(!selectedSize){
+      alert("Please select a size before adding to cart!"); // Prevent adding without size
+      return;
+    } else {
+      alert(`Added to cart :${product.title}, size:${selectedSize}`)
+    }
+  }
+
   if (!product) {
     return (
       <Container className="text-center mt-5">
@@ -50,7 +65,7 @@ function Productdetails() {
   }
 
   return (
-    <Container className="pt-5 mt-4"> {/* Added extra padding at the top */}
+    <Container className="pt-5 mt-1 main_container px-5"> 
     <Row>
       {/* Left Column - Main Product Image */}
       <Col md={7}>
@@ -70,13 +85,14 @@ function Productdetails() {
           <div className="flex-fill text-center py-2 text-muted">BRAND</div> */}
         </div>
   
-        {/* Similar Products - Larger Images with Spacing */}
-        <Row className="mt-4 pb-4">
+       
+        <Row className="mt-4 pb-4 g-1">
   {similarProducts.length > 0 ? (
     similarProducts.map((item) => (
-      <Col key={item.id} md={6} className="mb-3">
+      <Col key={item.id} md={4} sm={6} xs={12} className="mb-3 pe-5"> 
         <div 
           className="border rounded p-3 shadow-sm bg-white mb-1 text-center" 
+          style={{ width: "100%", margin: "0 auto", padding: "8px" }} 
         >
           {/* Product Image */}
           <Link to={`/products/${category}/${item.id}`}>
@@ -84,12 +100,12 @@ function Productdetails() {
               src={item.image} 
               className="img-fluid rounded" 
               alt={item.title} 
-              style={{ maxWidth: "90%", height: "auto" }} 
+              style={{ maxWidth: "80%", height: "auto" }} 
             />
           </Link>
 
           {/* Product Name - Smaller Font */}
-          <p className="mt-2 mb-1 text-muted" style={{ fontSize: "0.9rem", fontWeight: "700" }}>
+          <p className="mt-2 mb-1 text-muted" style={{ fontSize: "0.9rem", fontWeight: "500" }}>
             {item.title}
           </p>
 
@@ -126,42 +142,43 @@ function Productdetails() {
       </Col>
   
       {/* Right Column - Product Details */}
-      <Col md={5}>
+      <Col md={5} className="pt-5 product-details-container"> 
   {/* Product Title & Brand */}
   <h2 className="fw-bold">{product.title}</h2>
   <p className="text-muted">Brand: {product.brand_name || "Unknown"}</p>
 
   {/* Ratings & Stars */}
- {/* Ratings & Stars */}
- <div className="d-flex align-items-center mt-2">
-  <span className="fw-bold fs-5">{product.rating?.rate || "5.0"}</span>
-  <Rating 
-    value={product.rating?.rate || 5} 
-    name="partail-rating"
-    precision={0.1} 
-    readOnly 
-    className="ms-2" 
-  />
-  <span className="text-muted ms-2">({product.rating?.count || 0} reviews)</span>
-</div>
-
+  <div className="d-flex align-items-center mt-2">
+    <span className="fw-bold fs-5">{product.rating?.rate || "5.0"}</span>
+    <Rating 
+      value={product.rating?.rate || 5} 
+      name="partial-rating"
+      precision={0.1} 
+      readOnly 
+      className="ms-2" 
+    />
+    <span className="text-muted ms-2">({product.rating?.count || 0} reviews)</span>
+  </div>
 
   {/* Share & WhatsApp Icons */}
-  <div className="d-flex align-items-center gap-3 mt-2">
+  <div className="d-flex align-items-center gap-3 mt-3">
     <i className="fa-solid fa-share-nodes fs-5 text-dark"></i>
     <i className="fa-brands fa-whatsapp fs-5 text-success"></i>
   </div>
 
-  {/* Select Size */}
-  <h6 className="mt-3">SELECT SIZE</h6>
-  <div className="d-flex gap-2">
+  {/* Select Size & Size Chart Link */}
+  <div className="d-flex justify-content-between align-items-center mt-4">
+    <h6 className="mb-0">SELECT SIZE</h6>
+    <a href="#size-chart" style={{fontSize:"0.9rem"}} className="text-dark text-decoration-none fw-bold">SIZE CHART</a>
+  </div>
+  <div className="d-flex gap-2 mt-3">
     {["S", "M", "L", "XL", "2XL"].map((size) => (
-      <Button key={size} variant="outline-dark">{size}</Button>
+      <Button key={size}  className={`size-button ${selectedSize === size ? "selected" : ""}`} onClick={()=>handlesize(size)}>{size}</Button>
     ))}
   </div>
 
   {/* Price Details */}
-  <div className="mt-3">
+  <div className="mt-4">
     <p className="mb-0 text-muted">
       <s> M.R.P: ₹{product.originalPrice || (product.price * 2).toFixed(2)}</s>
     </p>
@@ -171,19 +188,15 @@ function Productdetails() {
   </div>
 
   {/* Add to Cart Button */}
-  <Button variant="success" className="w-100 mt-3">ADD TO CART</Button>
+  <Button variant="success" className="w-100 mt-4" onClick={handletocart}>ADD TO CART</Button>
 
-  {/* Size Chart Link (Click to Scroll) */}
-  <h5 className="mt-4">
-    <a href="#size-chart" className="text-dark text-decoration-none fw-bold">SIZE CHART</a>
-  </h5>
-
-  {/* Size Chart Section (With ID for Scroll) */}
-  <div id="size-chart">
-    <Table bordered>
-      <thead className="table-light">
+  {/* Size Chart Section */}
+  <div id="size-chart" className="mt-5">
+    <h6 className="fw-bold text-center">Size Chart</h6>
+    <Table bordered striped hover className="mt-2 text-center">
+      <thead className="table-dark text-white">
         <tr>
-          <th>Size</th>
+          <th>Brand Size</th>
           <th>S</th>
           <th>M</th>
           <th>L</th>
@@ -192,18 +205,15 @@ function Productdetails() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Bust (inches)</td>
-          <td>32</td>
-          <td>34</td>
-          <td>36</td>
-          <td>38</td>
-          <td>40</td>
-        </tr>
+        <tr><td>Chest (inches)</td><td>32</td><td>34</td><td>36</td><td>38</td><td>40</td></tr>
+        <tr><td>Length (inches)</td><td>32</td><td>34</td><td>36</td><td>38</td><td>40</td></tr>
+        <tr><td>Bust (inches)</td><td>32</td><td>34</td><td>36</td><td>38</td><td>40</td></tr>
+        <tr><td>Shoulder (inches)</td><td>16</td><td>16.5</td><td>17</td><td>17.5</td><td>18</td></tr>
       </tbody>
     </Table>
   </div>
 </Col>
+
 
     </Row>
   </Container>

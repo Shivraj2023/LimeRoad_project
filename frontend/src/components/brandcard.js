@@ -1,12 +1,19 @@
 // BrandCard.js
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import './brandcard.css'
 
-function BrandCard({ image, brandName }) {
+function BrandCard({ image, brandName,brandid,main }) {
+  
+
   return (
     <div className="card brand-card">
         <h3 className='custom'>{brandName} ALERT..!</h3>
-      <img src={image} alt={brandName} className="card-img-top" />
+        <Link to={`/brand/${main}/${brandid}`}>
+        <img src={image} alt={brandName} className="card-img-top" />
+      </Link>
+
       <div className="card-body">
     <img 
     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRmLtGCnpFfkNXI-18f7i0xu3nezn6m8VGBA&s" 
