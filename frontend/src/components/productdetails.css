@@ -1,0 +1,109 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:rgba(223, 223, 228, 0.411);
+}
+
+/* Product Image */
+.d-flex.gap-2 img {
+    max-width: 100%;
+    height: auto;
+    
+    border-radius: 5px;
+}
+
+/* Product Details */
+.fw-bold {
+    font-size: 22px;
+}
+
+.text-muted {
+    font-size: 14px;
+}
+
+/* Size Options */
+.d-flex.gap-2 button {
+    border: 1px solid #000;
+    padding: 8px 15px;
+    background: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.d-flex.gap-2 button:hover {
+    background-color: #000;
+    color: white;
+}
+
+/* Price Info */
+.text-danger {
+    font-size: 22px;
+}
+
+.text-danger span {
+    font-size: 14px;
+}
+
+/* Add to Cart Button */
+.w-100.mt-3 {
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.w-100.mt-3:hover {
+    background-color: #218838;
+}
+
+/* Size Chart Table */
+.table-light th {
+    text-align: center;
+    font-weight: bold;
+}
+
+td {
+    text-align: center;
+}
+
+/* Tabs (Similar, Colour, Brand) */
+.d-flex.border-bottom div {
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.d-flex.border-bottom div:first-child {
+    border-bottom: 2px solid green;
+    color: green;
+}
+
+.d-flex.border-bottom div:not(:first-child) {
+    color: gray;
+}
+
+/* Similar Products */
+.mt-3 .img-fluid {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.mt-3 .img-fluid:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column;
+    }
+}
