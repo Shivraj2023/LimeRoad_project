@@ -5,6 +5,7 @@ import Home from './home';
 import Products from './products';
 import Productdetails from './productdetails';
 import BrandProduct from './brandproduct';
+import Cartproducts from './Cartproducts';
 import { Outlet } from 'react-router-dom';
 
 
@@ -29,7 +30,10 @@ function Router() {
           <Route path="/:category/:subcategory" element={<Products/>}/>
           <Route path="/:category" element={<Products/>}/>
           <Route path="/products/:category/:id" element={<Productdetails />} />
+          
           </Route>
+          <Route path='/cartpage' element={<Cartproducts/>}/>
+         
         </Routes>
       
     </BrowserRouter>

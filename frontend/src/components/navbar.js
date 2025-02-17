@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { addItem, removeItem } from './cartslice';
+
 import "./navbar.css";
 
 function Navbar() {
+  const cartItems = useSelector((state) => state.cart.items); 
+  const totalItems = Array.isArray(cartItems) ? cartItems.reduce((acc, item) => acc + item.quantity, 0) : 0; 
+  
+
   const [categories, setCategory] = useState({
     men: [],
     women: [],
@@ -148,10 +155,16 @@ function Navbar() {
             <span className="fs-6">Search</span>
           </div>
 
-          <div className="d-flex flex-column align-items-center p-3 ps-3">
-            <i className="fa-solid fa-cart-shopping fs-6"></i>
-            <span className="fs-6">Cart</span>
+         <div className="d-flex flex-column align-items-center p-3 ps-3">
+              <Link to="/cartpage" className="cart-link">
+              <i className="fa-solid fa-cart-shopping fs-6"></i>
+               <span className="fs-6">Cart</span>
+               {totalItems > 0 && (
+               <div className="cart-item-count">{totalItems}</div>  // Display item count above the cart icon
+              )}
+           </Link>
           </div>
+
 
           <div className="d-flex flex-column align-items-center p-3 pe-1">
             <i className="fa-solid fa-user fs-6"></i>

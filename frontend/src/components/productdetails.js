@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Spinner, Table } from "react-bootstrap";
 import {Rating} from "@mui/material";
+import { useDispatch ,useSelector} from 'react-redux';
+import { addToCart} from './cartslice'; 
 import "./productdetails.css";
 
 function Productdetails() {
@@ -9,6 +11,9 @@ function Productdetails() {
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
+
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.items);
 
   useEffect(() => {
     fetch("/assets/assets.json")
@@ -51,10 +56,31 @@ function Productdetails() {
     if(!selectedSize){
       alert("Please select a size before adding to cart!"); // Prevent adding without size
       return;
-    } else {
-      alert(`Added to cart :${product.title}, size:${selectedSize}`)
+    } 
+     const cartItem = {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      category:`${category}`,
+      size: selectedSize,
+      quantity: 1, 
+    };
+    console.log('item--------',cartItem);
+
+    dispatch(addToCart(cartItem));
+    const updatedCart = [...cart, cartItem];
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    alert(`Added to cart: ${product.title}, size: ${selectedSize}`);
+  }    
+
+  useEffect(() => {
+   
+    if (cart.length > 0) {
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
-  }
+  }, [cart]);
 
   if (!product) {
     return (

@@ -104,4 +104,29 @@
       font-size: 24px;
       cursor: pointer;
     }
+
+    .cart-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items:center;
+      position: relative;
+    }
+    .cart-item-count {
+      position: absolute; /* Position the count on top-right of the cart icon */
+      top: -5px;
+      right: -10px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
     
