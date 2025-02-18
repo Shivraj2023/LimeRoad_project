@@ -9,61 +9,49 @@ import './reusable.css';
 const ProductPage = ( {products}) => {
 
    const { category, subcategory } = useParams();
+
    const [filteredProducts, setFilteredProducts] = useState([]);
-   const[filters,setFilters]=useState([])
+   const [baseFilteredProducts, setBaseFilteredProducts] = useState([]);
+   const[filters,setFilters]=useState({price:null,discount:null})
+   const [selectedFilters, setSelectedFilters] = useState({});
    const [categories, setCategories] = useState([]);
   
    useEffect(() => {
-    console.log("category: ", category);
-  console.log("subcategory: ", subcategory);
-
-    if (category) {
-      // Determine the category key based on the category
+      if (category) {
+      
       let categoryKey = "";
       if (category === "men" || category === "women") {
-        categoryKey = `${category.toLowerCase()}s_products`; // Append 's_products' for 'men' and 'women'
+        categoryKey = `${category.toLowerCase()}s_products`;
       } else if (category === "kids" || category === "home") {
-        categoryKey = `${category.toLowerCase()}_products`; // Append '_products' for 'kids' and 'home'
+        categoryKey = `${category.toLowerCase()}_products`; 
       }
   
       if (categoryKey && products[categoryKey]) {
         const categoryList = [...new Set(products[categoryKey].map((product) => product.category))];
-        setCategories(categoryList); // Set available categories for the selected category
-        console.log("categoryKey data: ", products[categoryKey]); // Check if the data exists
-        console.log("key------", categoryKey);
-      }
-      console.log("products[categoryKey] before filtering: ", products[categoryKey]);
-
-  
+        setCategories(categoryList); 
+             }
+        
       if (subcategory) {
-        // Filter products based on both category and subcategory
-        const filtered = products[categoryKey]?.filter(
+           const filtered = products[categoryKey]?.filter(
           (product) =>
             product.category.toLowerCase() === subcategory.toLowerCase() // Filter by subcategory
-                   ) 
+           ) 
 
         setFilteredProducts(filtered);
+        setBaseFilteredProducts(filtered)
       } else {
         // Filter products based only on category
         const filtered = products[categoryKey]
                
         setFilteredProducts(filtered);
+        setBaseFilteredProducts(filtered)
       }
     } else {
-      // If no category is specified, show all products (you can modify this if needed)
+      setBaseFilteredProducts([]);
       setFilteredProducts([]);
       setCategories([]);
     }
   }, [category, subcategory, products]);
-  
- 
-   console.log("filtered products=====",filteredProducts)
-
-
-
-
-
-  
 
 
   const handleFilterChange = (e) => {
@@ -71,10 +59,23 @@ const ProductPage = ( {products}) => {
     setFilters({ ...filters, [name]: value });
   };
 
-  /* const filteredProducts1 = filteredProducts1.filter((p) =>
-    (!filters.price || p.price <= parseInt(filters.price)) &&
-    (!filters.discount || p.discount >= parseInt(filters.discount))
-  ); */
+
+  const applyFilters = () => {
+    setSelectedFilters(filters); 
+        let filtered = [...baseFilteredProducts];
+    
+      if (filters.price) {
+      filtered = filtered.filter(product => product.price <= parseInt(filters.price));
+    }
+
+      if (filters.discount) {
+      filtered = filtered.filter(product => product.offer_percent >= parseInt(filters.discount));
+    }
+
+      setFilteredProducts(filtered);
+  };
+
+  
   
 
   return (
@@ -84,18 +85,24 @@ const ProductPage = ( {products}) => {
         <div className="col-md-3 p-3 border-end">
           <h5>Filters</h5>
           <form>
+          <label>Max Price:</label>
             <select className="form-select mb-3" name="price" onChange={handleFilterChange}>
               <option value="">Select</option>
               <option value="500">Under ₹500</option>
               <option value="1000">Under ₹1000</option>
               <option value="2000">Under ₹2000</option>
             </select>
+            <label>Min Discount:</label>
             <select className="form-select mb-3" name="discount" onChange={handleFilterChange}>
               <option value="">Select</option>
               <option value="10">10% or more</option>
               <option value="20">20% or more</option>
               <option value="50">50% or more</option>
             </select>
+
+            <button type="button" className="btn btn-primary" onClick={applyFilters}>
+              Apply Filters
+            </button>
           </form>
         </div>
 

@@ -66,7 +66,7 @@ function Productdetails() {
       size: selectedSize,
       quantity: 1, 
     };
-    console.log('item--------',cartItem);
+   
 
     dispatch(addToCart(cartItem));
     const updatedCart = [...cart, cartItem];
@@ -100,7 +100,12 @@ function Productdetails() {
           src={product.image} 
           className="img-fluid rounded" 
           alt={product.title} 
-          style={{ maxHeight: "550px", objectFit: "contain" }} 
+          style={{ 
+            maxHeight: "550px", 
+            objectFit: "contain", 
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.9)", 
+            border: "10px solid #f0f0f0"
+          }}  
         />
       </div>
   
@@ -206,7 +211,9 @@ function Productdetails() {
   {/* Price Details */}
   <div className="mt-4">
     <p className="mb-0 text-muted">
-      <s> M.R.P: ₹{product.originalPrice || (product.price * 2).toFixed(2)}</s>
+    <s> M.R.P: ₹{(product.price / (1 - (product.offer_percent / 100))).toFixed(2)}</s>
+
+
     </p>
     <p className="fw-bold fs-4 text-danger">
       Price: ₹{product.price} <span className="fs-6">({product.offer_percent}% OFF)</span>

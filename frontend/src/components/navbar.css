@@ -1,6 +1,7 @@
 
 .fixed-navbar {
   position: fixed;
+  
   top: 0;
   left: 0;
   width: 100%;
@@ -115,18 +116,116 @@
     }
     .cart-item-count {
       position: absolute; /* Position the count on top-right of the cart icon */
-      top: -5px;
-      right: -10px;
-      background-color: red;
+      top: -6px;
+      right: -18px;
+      background-color: rgb(196, 11, 11);
       color: white;
       border-radius: 50%;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       text-align: center;
       font-size: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    .profile-container {
+      position: relative;
+    }
+        
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .profile-container::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 57px;
+      bottom: -5px; /* Adjust distance from text */
+      width: 100%; /* Full width */
+      height: 3px; /* Thickness */
+      background-color: red;
+      transform: scaleX(0);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .profile-container:hover::after {
+      transform: scaleX(1); /* Expands the underline */
+    }
+    
+    
+    .profile-dropdown {
+      position: absolute;
+      top: 60px; /* Adjust so it appears just above the navbar */
+      left: 50%;
+      transform: translateX(-50%); /* Centers it to the profile icon */
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      width: 200px;
+      text-align: center;
+       z-index: 10; 
+      display: none; 
+     /*  margin-left: -10px; */
+    }
+    
+    .profile-container:hover .profile-dropdown {
+      display: block; /* Show on hover */
+    }
+    
+    .profile-welcome {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .profile-text {
+      font-size: 12px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+    
+    .profile-login-btn {
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    .profile-login-btn:hover {
+      background-color: #e03e00;
+    }  
+
+    .profile-divider {
+      margin: 10px 0;
+      border: none;
+      height: 1px;
+      background-color: #ddd;
+    }
+    
+    /* Profile links styling */
+    .profile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .profile-link {
+      text-decoration: none;
+      font-size: 12px;
+      color: #333; 
+      padding: 5px;
+      transition: color 0.3s ease;
+    }
+    
+    .profile-link:hover {
+      color: black;
+      font-weight: bold;
     }
     
     

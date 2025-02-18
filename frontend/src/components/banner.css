@@ -1,6 +1,6 @@
 
 .banner-main{
-    /* margin-top: 60px; */
+   padding-top: 13px;
     display: flex;
     text-align: center;
     align-items: center;
@@ -36,7 +36,7 @@
   
     cursor: pointer;
        font-size:14px;
-    transition: all 0.3s ease-in-out;
+       transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
     color: #555; 
     text-decoration: none;
 }
@@ -58,6 +58,7 @@
     position: absolute;
     bottom: -5px;
     left: 0;
+    transition: width 0.3s ease-in-out;
 }  
  
 .second-main {
@@ -86,6 +87,7 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover; /* Ensures the image fills the circle */
+    transition: border 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
   #category-myfeed{
     width: 50px;
@@ -106,6 +108,7 @@
     border-radius: 50%;
     border: 2px solid #4CAF50;
     transition: border 0.3s ease-in-out;
+    transform: scale(1.05);
   }
 
   /* .category-item.active{

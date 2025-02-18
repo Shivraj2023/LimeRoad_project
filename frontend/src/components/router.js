@@ -6,15 +6,23 @@ import Products from './products';
 import Productdetails from './productdetails';
 import BrandProduct from './brandproduct';
 import Cartproducts from './Cartproducts';
-import { Outlet } from 'react-router-dom';
+import Login from './login';
+import Footer from './footer';
+import { Outlet,useLocation } from 'react-router-dom';
 
 
-const Layout = () => (
+
+const Layout = () => {
+  const location =useLocation();
+  return(
   <>
     <Navbar />
     <Outlet />
+    {location.pathname !== '/cartpage' && location.pathname !== '/login' && <Footer />}
+
   </>
-);
+  );
+};
 
 
 function Router() {
@@ -30,7 +38,7 @@ function Router() {
           <Route path="/:category/:subcategory" element={<Products/>}/>
           <Route path="/:category" element={<Products/>}/>
           <Route path="/products/:category/:id" element={<Productdetails />} />
-          
+          <Route path='/login' element={<Login/>}/>
           </Route>
           <Route path='/cartpage' element={<Cartproducts/>}/>
          
