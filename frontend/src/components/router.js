@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes,Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Navbar from './navbar';
 import Home from './home';
 import Products from './products';
@@ -8,6 +8,7 @@ import BrandProduct from './brandproduct';
 import Cartproducts from './Cartproducts';
 import Login from './login';
 import Footer from './footer';
+import Payment from './payment'
 import { Outlet,useLocation } from 'react-router-dom';
 
 
@@ -41,6 +42,7 @@ function Router() {
           <Route path='/login' element={<Login/>}/>
           </Route>
           <Route path='/cartpage' element={<Cartproducts/>}/>
+          <Route path='/payment' element={<Payment/>}/>
          
         </Routes>
       

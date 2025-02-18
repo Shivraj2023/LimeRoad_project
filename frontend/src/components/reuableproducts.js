@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from 'react';
+import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -112,7 +112,7 @@ const ProductPage = ( {products}) => {
       {/* Categories Section */}
       <div className="d-flex flex-wrap ps-5 mb-3">
     {categories.map((category, index) => (
-      <span key={index} className="badge bg-light text-black p-2  ms-4 me-4 mb-3" style={{backgroundColor:"white", border:"1px solid grey", borderRadius: "10%"}}>
+      <span key={index} className="badge bg-light text-black p-2  ms-4 me-4 mb-3" style={{backgroundColor:"white", border:"1px solid grey",borderRadius: "10%"}}>
         {category}
       </span>
     ))}

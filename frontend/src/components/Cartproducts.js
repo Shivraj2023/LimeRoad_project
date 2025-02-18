@@ -100,7 +100,11 @@ function Cartproducts() {
                 <p>Free Delivery</p>
                 <hr />
                 <p><strong>Total Payable: ₹{totalPrice}</strong></p>
-                <button className="btn btn-success btn-lg w-100" style={{ backgroundColor: '#28a745', borderColor: '#28a745' }}>Buy Now</button>
+               
+
+             <Link to="/payment" style={{ textDecoration: 'none' }}>
+              <button className="btn btn-success btn-lg w-100" style={{ backgroundColor: '#28a745', borderColor: '#28a745' }}> Buy Now </button>
+              </Link>                          
               </div>
             </div>
           </div>
